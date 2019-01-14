@@ -31,10 +31,12 @@ from PyQt5.QtWidgets import *
 # This is our window from QtCreator
 import """
 
-py_mainfile_tail = """
+py_mainfile_middle = """
  
 # create class for our Raspberry Pi GUI
-class MainWindow(QMainWindow, mainwindow_auto.Ui_MainWindow):
+class MainWindow(QMainWindow,  """
+
+py_mainfile_tail = """.Ui_MainWindow):
  # access variables inside of the UI's file
  def __init__(self):
   super(self.__class__, self).__init__()
@@ -69,6 +71,8 @@ if args.dir is not None:
 	output_dir = args.dir
 if args.inputfn is not None:
 	input_filename = args.inputfn
+if args.outputfn is not None:
+	finalfilename = args.outputfn
 
 #We check that subdir "build" exists, if not, we create it
 if not os.path.isdir(working_path + "/" + output_dir):
@@ -119,7 +123,7 @@ if args.mainfile:
 		print("> main.py already exists. Will be replaced.")
 		os.remove(working_path + "/" + output_dir + "/main.py")
 	mainpyfile = open(working_path + "/" + output_dir + "/main.py", "w")
-	mainpyfile.write(py_mainfile_header + finalfilename + py_mainfile_tail)
+	mainpyfile.write(py_mainfile_header + finalfilename + py_mainfile_middle + finalfilename + py_mainfile_tail)
 	mainpyfile.close()
 	print("> Done.")
 
